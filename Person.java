@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Person extends Main {
+public class Person extends File {
     String id;
     String name;
     String RFID;
@@ -37,6 +37,14 @@ public class Person extends Main {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getID() {
+        return this.id;
+    }
+
+    public String getClockIn() {
+        return this.clockIn;
     }
 
     public void writePersonData() {

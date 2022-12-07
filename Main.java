@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Main extends File {
+public class Main {
     Map<String, Person> people; //ID, object
 
     public void setPerson(String id, String name) {
@@ -18,6 +18,7 @@ public class Main extends File {
         super();
         people = new HashMap<String, Person>();
     }
+
     public static void main(String[] args) throws Exception {
         Main main = new Main();
         main.setPerson("656255", "Jose");
