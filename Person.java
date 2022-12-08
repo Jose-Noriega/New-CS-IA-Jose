@@ -1,4 +1,4 @@
-import java.util.*;
+//import java.util.*;
 
 public class Person extends File {
     String id;
@@ -7,13 +7,8 @@ public class Person extends File {
     String clockIn;
     boolean present;
 
-    Person(String id, String name) {
-        super();
-        this.id = id;
-        this.name = name;
-    }
+    Person(){}
     Person(String id, String name, String RFID) {
-        super();
         this.id = id;
         this.name = name;
         this.RFID = RFID;
@@ -41,6 +36,10 @@ public class Person extends File {
 
     public String getID() {
         return this.id;
+    }
+
+    public String getRFID() {
+        return this.RFID;
     }
 
     public String getClockIn() {
