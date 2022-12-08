@@ -4,7 +4,7 @@ public class Person extends File {
     String id;
     String name;
     String RFID;
-    String clockIn;
+    double clockIn;
     boolean present;
 
     Person(){}
@@ -12,17 +12,18 @@ public class Person extends File {
         this.id = id;
         this.name = name;
         this.RFID = RFID;
+        this.present = false;
     }
     //setters
     public void setRFID(String RFID) {
         this.RFID = RFID;
     }
 
-    public void clockIn(String time) {
+    public void clockIn(double time) {
         this.clockIn = time;
     } 
 
-    public void setPresent(boolean isPresent) {
+    public void setAttendance(boolean isPresent) {
         this.present = isPresent;
     }
     //getters
@@ -42,10 +43,19 @@ public class Person extends File {
         return this.RFID;
     }
 
-    public String getClockIn() {
+    public double getClockIn() {
         return this.clockIn;
     }
 
-    public void writePersonData() {
+    //logic to check if they are present
+    public void checkAttendance() {
+        if (isPresent()) {
+            return;
+        }
+        if (getClockIn() > meetingStartTime && getClockIn() < meetingEndTime) {
+            setAttendance(true);
+        } else {
+            setAttendance(false);
+        }
     }
 }

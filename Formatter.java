@@ -30,7 +30,7 @@ public class Formatter {
     }
 
     //method to format date for file names
-    String formatDate() {
+    String formatFileDate() {
         return fileDateFormatter.format(today);
     }
 

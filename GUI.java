@@ -14,6 +14,7 @@ public class GUI extends Person {
 
     // constructor
     GUI() {
+        readMembers();
     }
 
     // method to create GUI
@@ -37,10 +38,13 @@ public class GUI extends Person {
         inputID.setEditable(true);
         inputID.addActionListener(new AbstractAction() { // I no longer made this a seperate object so this might not work
             @Override
-            public void actionPerformed(ActionEvent e) { //do the sign up
+            public void actionPerformed(ActionEvent e) { //do the clock in---DONE
                 String input = inputID.getText();
                 System.out.println(input);
                 inputID.setText("");
+                Person member = people.get(input);
+                member.clockIn(formatter.formatCurrentTime());
+                member.checkAttendance();
                 if (input.equals("admin")) {
                     frameAttendance.dispose();
                     createAdminGUI();
@@ -81,7 +85,7 @@ public class GUI extends Person {
         frameAttendance.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    public void createSignUpGUI() { // I basically added this entire method so I do not know if it works.
+    public void createSignUpGUI() { // add an rfid for when you sign up maybe
         frameSignUp = new JFrame("Attendance GUI");
 
         frameSignUp.addWindowListener(new WindowAdapter() {
@@ -113,6 +117,8 @@ public class GUI extends Person {
                 System.out.println(nameInput);
                 System.out.println(IDInput);
                 //do the sign up
+                writeMember(IDInput, nameInput, null, false);
+                setPerson(IDInput, nameInput, null);
                 inputName.setText("");
                 inputID.setText("");
                 nameInput = "";
@@ -130,6 +136,8 @@ public class GUI extends Person {
                 System.out.println(nameInput);
                 System.out.println(IDInput);
                 //do the sign up
+                writeMember(IDInput, nameInput, null, false);
+                setPerson(IDInput, nameInput, null);
                 inputName.setText("");
                 inputID.setText("");
             }
@@ -203,6 +211,7 @@ public class GUI extends Person {
                 String RFIDInput = inputRFID.getText();
                 System.out.println(RFIDInput);
                 //do the RFID link
+                writeMember(IDInput, people.get(IDInput).getName(), RFIDInput, true);
                 inputID.setText("");
                 inputRFID.setText("");
             }
