@@ -33,5 +33,6 @@ public class Main {
         System.out.println(obj.getPerson("123456").getName());
         obj.readMembers();
         System.out.println("adklsj");
+        obj.createAttendanceGUI();
     }
 }
