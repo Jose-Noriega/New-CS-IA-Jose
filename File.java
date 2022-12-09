@@ -8,7 +8,7 @@ public class File extends Main {
     File memberFile;
 
     File() {
-        attendanceFileName = formatter.formatFileDate() + ".txt";
+        attendanceFileName = formatter.formatFileDate() + ".csv";
         memberFileName = "members.txt";
     }
 
@@ -28,27 +28,26 @@ public class File extends Main {
     }
 
     public boolean isThere(String line) {
-        boolean found = false;
         try{
             List<String> allLines = Files.readAllLines(Paths.get(memberFileName));
             if (allLines.indexOf(line) != -1) {
-                found = true;
+                return true;
             }
         } catch (Exception e) {
-
-        }
-        return found;
+            System.out.println(e);
+        } return false;
     }
 
     // writters
     public void writeMember(String id, String name, String RFID, boolean setRFID) {
         try {
             FileWriter memberWritter = new FileWriter(memberFileName, true);
-            if (setRFID) {
+            String myLine = id + "," + name + "," + ((RFID != null) ? RFID : "");
+            if (setRFID && isThere(myLine)) {
                 replaceLine("".concat(id + "," + name + ","), "".concat(id + "," + name + "," + RFID),
                         memberFileName);
-            } else {
-                memberWritter.write(id + "," + name + "," + ((RFID != null) ? RFID : "") + "\n");
+            } else if (!isThere(myLine)) {
+                memberWritter.write(myLine + "\n");
             }
             memberWritter.close();
         } catch (Exception e) {

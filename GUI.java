@@ -43,8 +43,12 @@ public class GUI extends Person {
                 System.out.println(input);
                 inputID.setText("");
                 Person member = people.get(input);
-                member.clockIn(formatter.formatCurrentTime());
-                member.checkAttendance();
+                try {
+                    member.clockIn(formatter.formatCurrentTime());
+                    member.checkAttendance();
+                } catch (Exception p) {
+                    JOptionPane.showMessageDialog(frameAttendance, "Student not signed up");
+                }
                 if (input.equals("admin")) {
                     frameAttendance.dispose();
                     createAdminGUI();
