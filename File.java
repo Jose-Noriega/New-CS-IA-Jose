@@ -27,15 +27,28 @@ public class File extends Main {
         }
     }
 
+    public boolean isThere(String line) {
+        boolean found = false;
+        try{
+            List<String> allLines = Files.readAllLines(Paths.get(memberFileName));
+            if (allLines.indexOf(line) != -1) {
+                found = true;
+            }
+        } catch (Exception e) {
+
+        }
+        return found;
+    }
+
     // writters
     public void writeMember(String id, String name, String RFID, boolean setRFID) {
         try {
             FileWriter memberWritter = new FileWriter(memberFileName, true);
             if (setRFID) {
-                replaceLine("".concat(id + "," + name + "," + null), "".concat(id + "," + name + "," + RFID),
+                replaceLine("".concat(id + "," + name + ","), "".concat(id + "," + name + "," + RFID),
                         memberFileName);
             } else {
-                memberWritter.write(id + "," + name + "," + RFID);
+                memberWritter.write(id + "," + name + "," + ((RFID != null) ? RFID : "") + "\n");
             }
             memberWritter.close();
         } catch (Exception e) {

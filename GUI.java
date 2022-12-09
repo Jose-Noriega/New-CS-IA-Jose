@@ -36,7 +36,7 @@ public class GUI extends Person {
 
         inputID = new JTextField(10);
         inputID.setEditable(true);
-        inputID.addActionListener(new AbstractAction() { // I no longer made this a seperate object so this might not work
+        inputID.addActionListener(new AbstractAction() { 
             @Override
             public void actionPerformed(ActionEvent e) { //do the clock in---DONE
                 String input = inputID.getText();
