@@ -44,4 +44,13 @@ public class Formatter {
         formattedTime = timeHours + (timeMinutes/60);
         return formattedTime;
     }
+
+    DateFormat timeFormat() {
+        return new SimpleDateFormat("HH:mm");
+    }
+
+    DateFormat dateFormat() {
+        return new SimpleDateFormat("MM/dd/yyyy");
+    }
+    
 }

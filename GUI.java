@@ -8,7 +8,8 @@ public class GUI extends Person {
     JFrame frameAttendance, frameSignUp, frameRFID, frameAdmin;
     JPanel panelAttendance, panelSignUp, panelRFID, panelAdmin;
     JTextArea instructionsID, instructionsName, instructionsRFID, instructionsAdminStartTime, instructionsAdminEndTime,instructionsTimeAttended;
-    JTextField inputID, inputName, inputRFID, inputStartTime, inputEndTime, inputPercentAttended;
+    JTextField inputID, inputName, inputRFID;
+    JFormattedTextField inputStartTime, inputEndTime, inputPercentAttended;
     JButton toSignUp, toTakeAttendance, memberSignUp, toRFID, setAdminSettings;
     JComboBox<String> startTime_AM_or_PM, endTime_AM_or_PM;
 
@@ -268,15 +269,15 @@ public class GUI extends Person {
         });
 
         panelAdmin = new JPanel();
-        instructionsAdminStartTime = new JTextArea("Please input the meeting starting time: ");
-        instructionsAdminEndTime = new JTextArea("Please input the meeting end time: ");
+        instructionsAdminStartTime = new JTextArea("Please input the meeting starting time: (hour:minute)");
+        instructionsAdminEndTime = new JTextArea("Please input the meeting end time: (hour:minute)");
         instructionsTimeAttended = new JTextArea("Please input the % time people need to be here: ");
         instructionsAdminStartTime.setEditable(false);
         instructionsAdminEndTime.setEditable(false);
         instructionsTimeAttended.setEditable(false);
-        inputStartTime = new JTextField("_:_", 5);
-        inputEndTime = new JTextField("_:_", 5);
-        inputPercentAttended = new JTextField("_%", 5);
+        inputStartTime = new JFormattedTextField(formatter.timeFormat());//5
+        inputEndTime = new JFormattedTextField(formatter.timeFormat());//5
+        inputPercentAttended = new JFormattedTextField();//5
         inputStartTime.setEditable(true);
         inputEndTime.setEditable(true);
         inputPercentAttended.setEditable(true);
