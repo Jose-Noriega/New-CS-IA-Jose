@@ -43,9 +43,9 @@ public class File extends Main {
         try {
             FileWriter memberWritter = new FileWriter(memberFileName, true);
             String myLine = id + "," + name + "," + ((RFID != null) ? RFID : "");
-            if (setRFID && isThere(myLine)) {
-                replaceLine("".concat(id + "," + name + ","), "".concat(id + "," + name + "," + RFID),
-                        memberFileName);
+            String oldLine = id + "," + name + ",";
+            if (setRFID && isThere(oldLine)) {
+                replaceLine(oldLine, myLine,memberFileName);
             } else if (!isThere(myLine)) {
                 memberWritter.write(myLine + "\n");
             }
