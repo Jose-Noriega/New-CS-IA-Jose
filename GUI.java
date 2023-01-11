@@ -25,7 +25,8 @@ public class GUI extends Person {
         frameAttendance.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                //do something when close
+                writeAttendance();
+                System.exit(0);
             }
         });
 
@@ -96,40 +97,46 @@ public class GUI extends Person {
         frameSignUp.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                //do the closing
+                writeAttendance();
+                System.exit(0);
             }
         });
 
         panelSignUp = new JPanel();
-        toTakeAttendance = new JButton("Go to obj");
+        toTakeAttendance = new JButton("Go to sign in");
         memberSignUp = new JButton("Sign up!");
         instructionsID = new JTextArea("Enter your id: ");// can be something else but this is juts this for now
         instructionsID.setEditable(false);
         instructionsName = new JTextArea("Enter your name: ");// name for now may change later
         instructionsName.setEditable(false);
+        instructionsRFID = new JTextArea("Enter your RFID: ");
+        instructionsRFID.setEditable(false);
 
         inputID = new JTextField(10);
         inputID.setEditable(true);
 
         inputName = new JTextField(20);
         inputName.setEditable(true);
-        inputName.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // sign the member up
-                String nameInput = inputName.getText();
-                String IDInput = inputID.getText();
-                System.out.println(nameInput);
-                System.out.println(IDInput);
-                //do the sign up
-                writeMember(IDInput, nameInput, null, false);
-                setPerson(IDInput, nameInput, null);
-                inputName.setText("");
-                inputID.setText("");
-                nameInput = "";
-                IDInput = "";
-            }
-        });
+        // inputName.addActionListener(new AbstractAction() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         // sign the member up
+        //         String nameInput = inputName.getText();
+        //         String IDInput = inputID.getText();
+        //         System.out.println(nameInput);
+        //         System.out.println(IDInput);
+        //         //do the sign up
+        //         writeMember(IDInput, nameInput, null, false);
+        //         setPerson(IDInput, nameInput, null);
+        //         inputName.setText("");
+        //         inputID.setText("");
+        //         nameInput = "";
+        //         IDInput = "";
+        //     }
+        // });
+
+        inputRFID = new JTextField(10);
+        inputRFID.setEditable(true);
 
         memberSignUp.setSize(100, 200);
         memberSignUp.addActionListener(new ActionListener() {
@@ -138,13 +145,16 @@ public class GUI extends Person {
                 // sign the member up
                 String nameInput = inputName.getText();
                 String IDInput = inputID.getText();
+                boolean setRFID = inputRFID.getText() != "" ? true : false;
+                String RFID = inputRFID.getText() != "" ? inputRFID.getText() : null;
                 System.out.println(nameInput);
                 System.out.println(IDInput);
                 //do the sign up
-                writeMember(IDInput, nameInput, null, false);
-                setPerson(IDInput, nameInput, null);
+                writeMember(IDInput, nameInput, RFID, setRFID);
+                setPerson(IDInput, nameInput, RFID);
                 inputName.setText("");
                 inputID.setText("");
+                inputRFID.setText("");
             }
         });
 
@@ -174,11 +184,13 @@ public class GUI extends Person {
 
         panelSignUp.add(instructionsID, createLayout(0, 0, 0.5, 1));
         panelSignUp.add(instructionsName, createLayout(0, 1, 0.5, 1));
-        panelSignUp.add(toTakeAttendance, createLayout(0, 3, 0.5, 3));// also do the thing that is in the other line
-        panelSignUp.add(toRFID, createLayout(0, 4, 0.5, 3)); // change to create 3 rows with each button
-        panelSignUp.add(memberSignUp, createLayout(0, 2, 0.5, 3));
+        panelSignUp.add(instructionsRFID, createLayout(0, 2, 0.5, 1));
+        panelSignUp.add(toTakeAttendance, createLayout(0, 4, 0.5, 3));// also do the thing that is in the other line
+        panelSignUp.add(toRFID, createLayout(0, 5, 0.5, 3)); // change to create 3 rows with each button
+        panelSignUp.add(memberSignUp, createLayout(0, 3, 0.5, 3));
         panelSignUp.add(inputID, createLayout(1, 0, 0.5, 2));
         panelSignUp.add(inputName, createLayout(1, 1, 0.5, 2));
+        panelSignUp.add(inputRFID, createLayout(1, 2, 0.5, 2));
         // panelSignUp.add(inputRFID, createLayout(1, 2, 0.5, 1));
         frameSignUp.setSize(400, 500);
         frameSignUp.setVisible(true);
@@ -191,7 +203,8 @@ public class GUI extends Person {
         frameRFID.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                //do the finish
+                writeAttendance();
+                System.exit(0);
             }
         });
 
@@ -264,7 +277,8 @@ public class GUI extends Person {
         frameAdmin.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                //do the end
+                writeAttendance();
+                System.exit(0);
             }
         });
 

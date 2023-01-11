@@ -27,9 +27,9 @@ public class File extends Main {
         }
     }
 
-    public boolean isThere(String line) {
+    public boolean isThere(String line, String file) {
         try{
-            List<String> allLines = Files.readAllLines(Paths.get(memberFileName));
+            List<String> allLines = Files.readAllLines(Paths.get(file));
             if (allLines.indexOf(line) != -1) {
                 return true;
             }
@@ -41,13 +41,13 @@ public class File extends Main {
     // writters
     public void writeMember(String id, String name, String RFID, boolean setRFID) {
         try {
-            if (getPerson(id).hasRFID()) {return;}
+            //if (getPerson(id).hasRFID()) {return;}
             FileWriter memberWritter = new FileWriter(memberFileName, true);
             String myLine = id + "," + name + "," + ((RFID != null) ? RFID : "");
             String oldLine = id + "," + name + ",";
-            if (setRFID && isThere(oldLine)) {
+            if (setRFID && isThere(oldLine, memberFileName)) {
                 replaceLine(oldLine, myLine,memberFileName);
-            } else if (!isThere(myLine)) {
+            } else if (!isThere(myLine, memberFileName)) {
                 memberWritter.write(myLine + "\n");
             }
             memberWritter.close();
@@ -59,13 +59,13 @@ public class File extends Main {
     // write attendance into file
     public void writeAttendance() {
         try {
-            FileWriter attendanceWriter = new FileWriter(attendanceFileName, true);
+            FileWriter attendanceWriter = new FileWriter(attendanceFileName, false);
             List<String> attendanceList = new ArrayList<String>(people.keySet());
             for (int i = 0; i < attendanceList.size(); i++) {
                 String memberID = attendanceList.get(i);
                 Person member = getPerson(memberID);
                 if (member.isPresent()) {
-                    attendanceWriter.write(memberID);
+                    attendanceWriter.write(memberID + "\n");
                 }
             }
             attendanceWriter.close();
