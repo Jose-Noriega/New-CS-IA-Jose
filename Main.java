@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Main {
     Map<String, Person> people; //ID, object
+    Map<String, String> mapRFID;
     double meetingStartTime;
     double meetingEndTime;
     Formatter formatter;
@@ -23,11 +24,19 @@ public class Main {
         meetingEndTime = time;
     }
 
+    public void setRFID(String RFID, String id) {
+        mapRFID.put(RFID, id);
+    }
+
     //getters
     public Person getPerson(String id) {
         return people.get(id);
     }
 
+    public String getId(String RFID) {
+        return mapRFID.get(RFID);
+    }
+    
     Main() {
         people = new HashMap<String, Person>();
         formatter = new Formatter();

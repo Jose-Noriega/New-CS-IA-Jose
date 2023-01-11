@@ -7,7 +7,13 @@ public class Person extends File {
     double clockIn;
     boolean present;
 
-    Person(){}
+
+    Person() {}
+    Person(String id, String name){
+        this.id = id;
+        this.name = name;
+        this.present = false;
+    }
     Person(String id, String name, String RFID) {
         this.id = id;
         this.name = name;
@@ -56,6 +62,20 @@ public class Person extends File {
             setAttendance(true);
         } else {
             setAttendance(false);
+        }
+    }
+
+    //check if user has RFID
+    public boolean hasRFID() {
+        try {
+            if(this.present) {
+                return true;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        } finally {
         }
     }
 }

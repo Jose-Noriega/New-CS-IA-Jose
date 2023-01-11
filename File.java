@@ -8,14 +8,14 @@ public class File extends Main {
     File memberFile;
 
     File() {
-        attendanceFileName = formatter.formatFileDate() + ".csv";
+        attendanceFileName = formatter.formatFileDate() + ".txt";
         memberFileName = "members.txt";
     }
 
     public void replaceLine(String lineToReplace, String newLine, String fileToChange) { // this replaces some lines
         try {
-            FileWriter memberWritter = new FileWriter(memberFileName, false);
             List<String> memberList = Files.readAllLines(Paths.get(memberFileName));
+            FileWriter memberWritter = new FileWriter(memberFileName, false);
             int index = memberList.indexOf(lineToReplace); // get the index of the line I want to replace
             memberList.set(index, newLine); // replace the old line with the new line
             for (int i = 0; i < memberList.size(); i++) { // rewrite the entire file
@@ -41,6 +41,7 @@ public class File extends Main {
     // writters
     public void writeMember(String id, String name, String RFID, boolean setRFID) {
         try {
+            if (getPerson(id).hasRFID()) {return;}
             FileWriter memberWritter = new FileWriter(memberFileName, true);
             String myLine = id + "," + name + "," + ((RFID != null) ? RFID : "");
             String oldLine = id + "," + name + ",";
@@ -130,5 +131,4 @@ public class File extends Main {
         }
         return copyOfArray;
     }
-
 }
