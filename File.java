@@ -19,7 +19,7 @@ public class File extends Main {
             int index = memberList.indexOf(lineToReplace); // get the index of the line I want to replace
             memberList.set(index, newLine); // replace the old line with the new line
             for (int i = 0; i < memberList.size(); i++) { // rewrite the entire file
-                memberWritter.write(memberList.get(i));
+                memberWritter.write(memberList.get(i) + "\n");
             }
             memberWritter.close();
         } catch (Exception e) {
@@ -49,6 +49,8 @@ public class File extends Main {
                 replaceLine(oldLine, myLine,memberFileName);
             } else if (!isThere(myLine, memberFileName)) {
                 memberWritter.write(myLine + "\n");
+            } if (setRFID) {
+                mapIdRFID(RFID,id);
             }
             memberWritter.close();
         } catch (Exception e) {

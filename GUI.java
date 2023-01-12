@@ -41,7 +41,12 @@ public class GUI extends Person {
         inputID.addActionListener(new AbstractAction() { 
             @Override
             public void actionPerformed(ActionEvent e) { //do the clock in---DONE
-                String input = inputID.getText();
+                String input = "";
+                try {
+                    input = getIdFromRFID(inputID.getText());
+                } catch (Exception p) {
+                    input = inputID.getText();
+                } 
                 System.out.println(input);
                 inputID.setText("");
                 Person member = people.get(input);

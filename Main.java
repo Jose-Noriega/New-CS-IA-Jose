@@ -14,8 +14,16 @@ public class Main {
     //setters
     public void setPerson(String id, String name, String RFID) {
         people.put(id, new Person(id, name, RFID));
+        System.out.println(RFID);
+        mapIdRFID(RFID, id);
+        System.out.println(mapRFID);
     }
 
+    public void mapIdRFID(String RFID, String id) {
+        if(!mapRFID.containsKey(RFID)) {
+            mapRFID.put(RFID, id);
+        }
+    }
     public void setMeetingStartTime(double time) {
         meetingStartTime = time;
     }
@@ -33,12 +41,18 @@ public class Main {
         return people.get(id);
     }
 
-    public String getId(String RFID) {
-        return mapRFID.get(RFID);
+    public String getIdFromRFID(String RFID) {
+        try {
+            System.out.println(mapRFID.get(RFID));
+            return mapRFID.get(RFID);
+        } catch (Exception z) {
+            return null;
+        }
     }
     
     Main() {
         people = new HashMap<String, Person>();
+        mapRFID = new HashMap<String, String>();
         formatter = new Formatter();
     }
 
@@ -54,8 +68,8 @@ public class Main {
         // System.out.println(obj.getPerson("570354").getName());
         // System.out.println(obj.getPerson("123456").getName());
         // obj.readMembers();
-        System.out.println("adklsj");
+        // System.out.println("adklsj");
         obj.createAttendanceGUI();
-        System.out.println(obj.people.get("656255").getRFID() != null);
+        // System.out.println(obj.people.get("656255").getRFID() != null);
     }
 }
