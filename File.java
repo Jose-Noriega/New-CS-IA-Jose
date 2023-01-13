@@ -92,6 +92,7 @@ public class File extends Main {
         try {
             FileReader memberReader = new FileReader(memberFileName);
             List<String> memberList = Files.readAllLines(Paths.get(memberFileName));
+            List<String> presentToday = Files.readAllLines(Paths.get(attendanceFileName));
             for (int i = 0; i < memberList.size(); i++) {
                 String tempValue = memberList.get(i);
                 String[] values = new String[3];
@@ -100,6 +101,9 @@ public class File extends Main {
                 String memberName = values[1];
                 String memberRFID = values[2];
                 setPerson(memberID, memberName, memberRFID);
+                if (presentToday.indexOf(memberID) != -1) {
+                    getPerson(memberID).setAttendance(true);
+                }
             }
             System.out.println(people);
             memberReader.close();
