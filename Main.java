@@ -20,9 +20,13 @@ public class Main {
     }
 
     public void mapIdRFID(String RFID, String id) {
-        if(!mapRFID.containsKey(RFID)) {
+        if(!mapRFID.containsKey(RFID) && RFID != null) {
             mapRFID.put(RFID, id);
         }
+    }
+
+    public boolean hasRFID(String RFID) {
+        return mapRFID.containsKey(RFID);
     }
     public void setMeetingStartTime(double time) {
         meetingStartTime = time;

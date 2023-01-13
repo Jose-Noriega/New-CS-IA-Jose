@@ -101,6 +101,7 @@ public class File extends Main {
                 String memberRFID = values[2];
                 setPerson(memberID, memberName, memberRFID);
             }
+            System.out.println(people);
             memberReader.close();
         } catch (Exception e) {
             System.out.println(e);
